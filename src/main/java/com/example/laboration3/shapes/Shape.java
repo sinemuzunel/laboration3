@@ -132,8 +132,8 @@ abstract public class Shape {
             long elapsedTimeNs,
             double boxX, double boxY,
             double boxWidth, double boxHeight) {
-        move(elapsedTimeNs);
-        constrain(boxX, boxY, boxWidth, boxHeight);
+        move(elapsedTimeNs); //hur en förflyttning sker kan ändras då olika för olika objekt
+        constrain(boxX, boxY, boxWidth, boxHeight); //objekt ser ut på olika sätt så kan omdefinieras.
     }
 
     /**
