@@ -8,7 +8,7 @@ public class Line extends Shape{
     private double y2;
 
     public Line(double x, double y, double x2, double y2, Color color) {
-        super(x2, y2, color);
+        super(x, y, color);
         this.x2 = x2;
         this.y2 = y2;
     }
@@ -16,7 +16,7 @@ public class Line extends Shape{
     public Line(){ //parameterlös konstruktur
         super();
         this.x2 = 100; //default värden ..
-        this.y2 =100;
+        this.y2 = 100;
     }
 
     public double getX2() {
@@ -48,8 +48,9 @@ public class Line extends Shape{
         gc.strokeLine(getX(), getY(), x2, y2);
     }
 
-    public void constrain(double x1, double y1, double x2, double y2){
-
+    @Override
+    protected void constrain(double boxX, double boxY, double boxWidth, double boxHeight) {
+        super.constrain(boxX, boxY, boxWidth, boxHeight);
     }
 
     @Override

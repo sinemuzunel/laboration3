@@ -28,7 +28,9 @@ public class World {
         this.width = width;
         this.height = height;
 
-        shapes = new ArrayList<>(); // an array of references (change to non-zero size)
+        shapes = new ArrayList<>();// an array of references (change to non-zero size)
+        shapes.add(new Rectangle(100, 50, true));
+        shapes.get(0).setVelocity(20, 40);
         // Create the actual Shape objects (sub types)
         // ....
     }

@@ -1,6 +1,8 @@
 package com.example.laboration3.shapes;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class Rectangle extends FillableShape{
     private double width;
@@ -30,10 +32,17 @@ public class Rectangle extends FillableShape{
 
     @Override
     public void paint(GraphicsContext gc) {
-
+        if(isFilled()){
+            gc.setFill(Color.RED);
+            gc.fillRect(getX(), getY(), width, height);
+        }else {
+            gc.setStroke(Color.RED);
+            gc.strokeRect(getX(), getY(), width, height);
+        }
     }
 
-    public void constrain(double x1, double y1, double x2, double y2){
-
+    @Override
+    protected void constrain(double boxX, double boxY, double boxWidth, double boxHeight) {
+        super.constrain(boxX, boxY, boxWidth, boxHeight);
     }
 }
