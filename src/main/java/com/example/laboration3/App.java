@@ -47,7 +47,7 @@ public class App extends Application {
             previousNs = nowNs;
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
-
+            System.out.println();
             // paint the background
             gc.setFill(Color.WHITESMOKE);
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());

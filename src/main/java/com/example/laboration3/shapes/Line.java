@@ -50,7 +50,24 @@ public class Line extends Shape{
 
     @Override
     protected void constrain(double boxX, double boxY, double boxWidth, double boxHeight) {
+        double dx = getDx();
+        double dy = getDy();
         super.constrain(boxX, boxY, boxWidth, boxHeight);
+        if (x2 < boxX) {
+            dx = Math.abs(dx);
+            setVelocity(dx, dy);
+        } else if (x2 > boxWidth) {
+            dx = -Math.abs(dx);
+            setVelocity(dx, dy);
+        }
+        if (y2 < boxY) {
+            dy = Math.abs(dy);
+            setVelocity(dx, dy);
+        } else if (y2 > boxHeight) {
+            dy = -Math.abs(dy);
+            setVelocity(dx, dy);
+        }
+
     }
 
     @Override

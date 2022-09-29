@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 /**
  * A representation of a world containing a set of moving shapes. NB! The worlds
@@ -13,8 +14,9 @@ import java.util.List;
  */
 public class World {
 
+    private static final int MAX_TICKS = 75;
     private double width, height; // this worlds width and height
-
+    private int ticks = 0;
     private final ArrayList<Shape> shapes; // an array of references to the shapes
 
     /**
@@ -29,8 +31,14 @@ public class World {
         this.height = height;
 
         shapes = new ArrayList<>();// an array of references (change to non-zero size)
-        shapes.add(new Rectangle(100, 50, true));
+        shapes.add(new Rectangle(100, 50, true, Color.BLUE));
+        shapes.add(new Circle(30, true, Color.RED));
+        shapes.add(new Circle(30, false, Color.ORANGE));
+        shapes.add(new Line(100, 50, 40, 80, Color.BLACK));
         shapes.get(0).setVelocity(20, 40);
+        shapes.get(1).setVelocity(30, 50);
+        shapes.get(2).setVelocity(40, 60);
+        shapes.get(3).setVelocity(50, 70);
         // Create the actual Shape objects (sub types)
         // ....
     }
@@ -54,9 +62,18 @@ public class World {
      */
     public void moveAndConstrain(long elapsedTimeNs) {
         // alterantive loop: for(Shape s : shapes) { ...
+
         for (Shape s : shapes) {
             s.moveAndConstrain(elapsedTimeNs, 0, 0, width, height);
+            if (s instanceof FillableShape && ticks == MAX_TICKS){
+                ((FillableShape) s).setFilled(!(((FillableShape) s).isFilled()));
+
+            }
         }
+        if (ticks == MAX_TICKS){
+            ticks = 0;
+        }
+        ticks++;
     }
 
     /**

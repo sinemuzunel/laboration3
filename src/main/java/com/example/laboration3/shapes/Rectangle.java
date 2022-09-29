@@ -8,10 +8,16 @@ public class Rectangle extends FillableShape{
     private double width;
     private double height;
 
-    public Rectangle(double width, double height, boolean filled) {
-        super(filled);
+    public Rectangle(double width, double height, boolean filled, Color color) {
+        super(filled, color);
         this.width = width;
         this.height = height;
+    }
+
+    public Rectangle() {
+        super(false, Color.BLACK);
+        this.width = 100;
+        this.height = 50;
     }
 
     public double getWidth() {
@@ -33,16 +39,35 @@ public class Rectangle extends FillableShape{
     @Override
     public void paint(GraphicsContext gc) {
         if(isFilled()){
-            gc.setFill(Color.RED);
+            gc.setFill(getColor());
             gc.fillRect(getX(), getY(), width, height);
         }else {
-            gc.setStroke(Color.RED);
+            gc.setStroke(getColor());
             gc.strokeRect(getX(), getY(), width, height);
         }
     }
 
     @Override
     protected void constrain(double boxX, double boxY, double boxWidth, double boxHeight) {
+        double dx = getDx();
+        double dy = getDy();
         super.constrain(boxX, boxY, boxWidth, boxHeight);
+        if (getX() + width < boxX) {
+            dx = Math.abs(dx);
+            setVelocity(dx, dy);
+        } else if (getX() + width > boxWidth) {
+            dx = -Math.abs(dx);
+            setVelocity(dx, dy);
+        }
+
+        if (getY() + height < boxY) {
+            dy = Math.abs(dy);
+            setVelocity(dx, dy);
+        } else if (getY() + height > boxHeight) {
+            dy = -Math.abs(dy);
+            setVelocity(dx, dy);
+        }
+
+
     }
 }
